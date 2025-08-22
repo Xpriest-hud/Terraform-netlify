@@ -1,4 +1,14 @@
-output "live_site_url" {
-  description = "The URL of the deployed Netlify site"
-  value       = netlify_site.site.ssl_url
+output "site_id" {
+  description = "The ID of the Netlify site"
+  value       = netlify_site.this.id
+}
+
+output "site_name" {
+  description = "The name of the Netlify site"
+  value       = netlify_site.this.name
+}
+
+output "site_url" {
+  description = "The live HTTPS URL of the deployed site"
+  value       = netlify_site.this.ssl_url
 }
