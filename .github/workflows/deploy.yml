@@ -27,7 +27,7 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
         env:
-          TF_VAR_netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          TF_VAR_netlify_api_token: ${{ secrets.NETLIFY_TOKEN }}
 
       # Step 4: Capture Terraform outputs (site_id and name)
       - name: Get Terraform Outputs
@@ -49,7 +49,7 @@ jobs:
       - name: Netlify Deploy
         run: |
           netlify deploy \
-            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
+            --auth ${{ secrets.NETLIFY_TOKEN }} \
             --site $SITE_ID \
             --dir ./site \
             --prod
