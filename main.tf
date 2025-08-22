@@ -23,11 +23,13 @@ data "netlify_site" "this" {
   id = var.netlify_site_id
 }
 
-# Example: manage environment variables for the site
 resource "netlify_environment_variable" "example" {
-  site_id = var.netlify_site_id
+  site_id = data.netlify_site.this.id
   key     = "API_URL"
-  value   = ["https://api.example.com"]
+
+  values {
+    value = "https://api.example.com"
+  }
 }
 
 
