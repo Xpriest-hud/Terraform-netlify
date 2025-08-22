@@ -1,9 +1,12 @@
+# Netlify Personal Access Token (from Netlify > User Settings > Applications)
 variable "netlify_token" {
-  description = "Netlify Personal Access Token"
+  description = "Netlify API token used for authentication"
   type        = string
+  sensitive   = true
 }
 
+# The ID of your existing Netlify site (from Site settings > General > Site information)
 variable "netlify_site_id" {
-  description = "ceea9258-eda5-4a5a-bc6b-d2fb7718f50d"
+  description = "The unique ID of the existing Netlify site to manage"
   type        = string
 }
