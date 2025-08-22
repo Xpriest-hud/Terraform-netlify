@@ -30,7 +30,9 @@ resource "random_string" "suffix" {
   upper   = false
 }
 
-resource "netlify_site" "my_unique_site" {
-  name = "${var.site_name_prefix}-${random_string.unique_suffix.result}"
+# Create Netlify site
+resource "netlify_site" "this" {
+  name = "my-terraform-site-${random_string.suffix.result}"
 }
+
 
