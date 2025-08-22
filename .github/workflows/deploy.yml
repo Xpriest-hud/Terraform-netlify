@@ -10,33 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      # Step 3: Terraform Init & Apply
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
         env:
-          TF_VAR_netlify_api_token: ${{ secrets.NETLIFY_TOKEN }}
+          TF_VAR_netlify_token: ${{ secrets.NETLIFY_TOKEN }}
+          TF_VAR_netlify_site_id: "YOUR_SITE_ID_FROM_NETLIFY"
 
-      # Step 4: Capture Terraform outputs (site_id and site_name)
-      - name: Get Terraform Outputs
-        id: tf_outputs
-        run: |
-          echo "SITE_ID=$(terraform output -raw netlify_site_id)" >> $GITHUB_ENV
-          echo "SITE_NAME=$(terraform output -raw netlify_site_name)" >> $GITHUB_ENV
-
-      # Step 5: Setup Node + Netlify CLI
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -45,11 +35,10 @@ jobs:
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
-      # Step 6: Deploy to Netlify
       - name: Netlify Deploy
         run: |
           netlify deploy \
             --auth ${{ secrets.NETLIFY_TOKEN }} \
-            --site $SITE_ID \
+            --site ${{ ceea9258-eda5-4a5a-bc6b-d2fb7718f50d }} \
             --dir ./site \
             --prod
