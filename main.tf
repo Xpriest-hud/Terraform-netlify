@@ -6,33 +6,21 @@ terraform {
     }
   }
 
+
   required_providers {
     netlify = {
       source  = "netlify/netlify"
-      version = "~> 0.2"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.6"
+      version = "~> 0.2.0"
     }
   }
-}
 
-# Configure Netlify provider
+
 provider "netlify" {
-  token = var.netlify_api_token
+  token = var.netlify_token
 }
 
-# Random suffix to ensure unique site name
-resource "random_string" "suffix" {
-  length  = 6
-  special = false
-  upper   = false
+# Use an existing site by ID
+data "netlify_site" "this" {
+  site_id = var.netlify_site_id
 }
-
-# Create Netlify site
-resource "netlify_site" "this" {
-  name = "my-terraform-site-${random_string.suffix.result}"
 }
-
-
