@@ -27,9 +27,7 @@ resource "netlify_environment_variable" "example" {
   site_id = data.netlify_site.this.id
   key     = "API_URL"
 
-  values {
-    value = "https://api.example.com"
   }
-}
+
 
 
