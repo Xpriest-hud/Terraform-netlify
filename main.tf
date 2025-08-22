@@ -16,7 +16,6 @@ terraform {
 
 provider "netlify" {
   token     = var.netlify_token
-  api_token = var.netlify_token
 }
 
 # Reference your existing Netlify site
@@ -30,3 +29,4 @@ resource "netlify_environment_variable" "example" {
   key     = "API_URL"
   value   = "https://api.example.com"
 }
+
