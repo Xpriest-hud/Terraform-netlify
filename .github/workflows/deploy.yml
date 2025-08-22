@@ -29,7 +29,7 @@ jobs:
         env:
           TF_VAR_netlify_api_token: ${{ secrets.NETLIFY_TOKEN }}
 
-      # Step 4: Capture Terraform outputs (site_id and name)
+      # Step 4: Capture Terraform outputs (site_id and site_name)
       - name: Get Terraform Outputs
         id: tf_outputs
         run: |
