@@ -20,13 +20,14 @@ provider "netlify" {
 
 # Reference your existing Netlify site
 data "netlify_site" "this" {
-  site_id = var.netlify_site_id
+  id = var.netlify_site_id
 }
 
 # Example: manage environment variables for the site
 resource "netlify_environment_variable" "example" {
   site_id = var.netlify_site_id
   key     = "API_URL"
-  value   = "https://api.example.com"
+  value   = ["https://api.example.com"]
 }
+
 
